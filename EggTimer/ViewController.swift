@@ -30,16 +30,19 @@ class ViewController: UIViewController {
 //            print(hardTime)
 //        }
         
-        //Switch
-        switch hardness {
-        case "Soft":
-            print(eggTimes["Soft"])//print(softTime)
-        case "Medium":
-            print(eggTimes["Medium"])//print(mediumTime)
-        case "Hard":
-            print(eggTimes["Hard"])//print(hardTime)
-        default:
-            print("NothingSelected")
+        // if let文の復習
+        if let hardness = hardness {
+            
+            //resultを介してアンラップ
+            let result = eggTimes[hardness]!
+            
+            //Switch ここまでシンプルに記載できる
+            switch hardness {
+            case hardness:
+                print(result)
+            default:
+                print("Error")
+            }
         }
     }
     
