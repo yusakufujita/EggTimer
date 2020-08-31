@@ -14,38 +14,38 @@ class ViewController: UIViewController {
 //    let mediumTime = 7
 //    let hardTime = 12
     
-    //同じコードを３つ書く必要はない…！
+    
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var titleLabel: UILabel!
+    let eggTimers = ["Soft":3, "Medium":4, "Hard": 7]
+      var secondRemaining = 60
+      var timer = Timer()
+      var totalTime = 0
+      var secondsPassed = 0
+
     @IBAction func hardnessSelected(_ sender: UIButton) {
-        
-        let hardness = sender.currentTitle
-        //辞書を使うことでより一行で表記できる。
-        let eggTimes = ["Soft": 5, "Medium": 7, "Hard": 12]
-        
-//        //if文で記載
-//        if hardness == "Soft" {
-//            print(softTime)
-//        } else if hardness == "Medium" {
-//            print(mediumTime)
-//        } else {
-//            print(hardTime)
-//        }
-        
-        // if let文の復習
-        if let hardness = hardness {
+            timer.invalidate()
+            let hardness = sender.currentTitle! // Soft, Medium, Hard
+            totalTime = eggTimers[hardness]!
             
-            //resultを介してアンラップ
-            let result = eggTimes[hardness]!
+            progressBar.progress = 0.0
+            secondsPassed = 0
+            titleLabel.text = hardness
             
-            //Switch ここまでシンプルに記載できる
-            switch hardness {
-            case hardness:
-                print(result)
-            default:
-                print("Error")
-            }
-        }
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
-
-
+    @objc func updateTimer() {
+        if secondsPassed < totalTime {
+            
+            secondsPassed += 1
+            progressBar.progress = Float(secondsPassed) / Float(totalTime)
+            print(Float(secondsPassed) / Float(totalTime))
+            
+        } else {
+            timer.invalidate()
+            titleLabel.text = "DONE!"
+        }
+    }
 }
