@@ -14,6 +14,8 @@ class ViewController: UIViewController {
 //    let mediumTime = 7
 //    let hardTime = 12
     
+    //修正しました。という文章を付け加えてみる。
+    
     
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var titleLabel: UILabel!
